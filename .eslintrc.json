@@ -35,7 +35,9 @@
         "map": [
           ["@components", "./src/components"],
           ["@pages", "./src/pages"],
-          ["@theme", "./src/theme"]
+          ["@theme", "./src/theme"],
+          ["@constants", "./src/constants"],
+          ["@helpers", "./src/helpers"]
         ],
         "extensions": [".js", ".json"]
       }

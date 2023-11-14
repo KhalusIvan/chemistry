@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Stage from "@pages/Stage";
+import Stage from "@pages/Stage/Stage";
 import { CssBaseline } from "@mui/material";
+import "./App.css";
 
 const router = createBrowserRouter([
   {
