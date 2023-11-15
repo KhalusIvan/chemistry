@@ -4,9 +4,9 @@ import { styled } from "styled-components";
 import { darkenColor } from "@helpers/colorHelper";
 
 export const ElementBox = styled(Box)`
-  background: ${(props) => props.elementColor};
+  background: ${(props) => props.element_color};
   border-radius: 2px;
-  border: 1px solid ${(props) => darkenColor(props.elementColor)};
+  border: 1px solid ${(props) => darkenColor(props.element_color)};
   width: 100%;
   height: 100%;
   padding: 4px;
@@ -19,7 +19,7 @@ export const LanthanideActinideWrapper = styled(Box)`
   position: absolute;
   top: ${(props) => (100 / 10) * (props.row - 1)}%;
   left: ${(props) => (100 / 18) * (props.column - 1)}%;
-  padding: 4px;
+  padding: 2px;
 `;
 
 export const LanthanideActinideText = styled.div`

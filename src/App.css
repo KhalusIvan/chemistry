@@ -1,7 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat&family=Roboto+Condensed&display=swap");
 
 body {
   font-family: "Roboto Condensed", sans-serif !important;
-  width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-flow: column;
+}
+
+#header__logo {
+  font-family: "Caveat", cursive;
+  font-size: 30px
 }

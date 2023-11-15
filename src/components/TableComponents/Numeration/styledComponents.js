@@ -1,11 +1,19 @@
 import { Box } from "@mui/material";
 import { styled } from "styled-components";
-import { tableHeight, tableWidth } from "@constants";
+import {
+  tableHeight,
+  tableWidth,
+  tableColumnNumerationWidth,
+  tableRowNumerationHeight,
+} from "@constants";
 
 export const TableColumnWrapper = styled.div`
-  position: relative;
-  width: 20px;
+  position: sticky;
+  width: ${tableColumnNumerationWidth}px;
   height: ${tableHeight}px;
+  left: 0;
+  z-index: 999;
+  background-color: #ffffff;
 `;
 
 export const TableColumnBox = styled(Box)`
@@ -21,11 +29,14 @@ export const TableColumnBox = styled(Box)`
 `;
 
 export const TableRowWrapper = styled.div`
-  position: relative;
-  width: 80%;
-  height: 30px;
+  position: sticky;
+  width: calc(100% - ${tableColumnNumerationWidth}px);
+  height: ${tableRowNumerationHeight}px;
   min-width: ${tableWidth}px;
-  margin-left: 20px;
+  margin-left: ${tableColumnNumerationWidth}px;
+  top: 0;
+  z-index: 999;
+  background-color: #ffffff;
 `;
 
 export const TableRowBox = styled(Box)`

@@ -37,7 +37,8 @@
           ["@pages", "./src/pages"],
           ["@theme", "./src/theme"],
           ["@constants", "./src/constants"],
-          ["@helpers", "./src/helpers"]
+          ["@helpers", "./src/helpers"],
+          ["@context", "./src/context"]
         ],
         "extensions": [".js", ".json"]
       }

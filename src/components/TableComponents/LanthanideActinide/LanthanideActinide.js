@@ -8,7 +8,7 @@ import {
 function LanthanideActinide() {
   return (
     <LanthanideActinideWrapper row={6} column={3}>
-      <ElementBox elementColor={"#CCEEFF"}>
+      <ElementBox element_color={"#CCEEFF"}>
         <LanthanideActinideSubText>57-71</LanthanideActinideSubText>
         <LanthanideActinideSubText>89-103</LanthanideActinideSubText>
         <LanthanideActinideText />

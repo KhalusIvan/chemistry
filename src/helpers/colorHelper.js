@@ -1,6 +1,4 @@
-export const darkenColor = (hex) => {
-  const factor = 0.2;
-
+export const darkenColor = (hex, factor = 0.2) => {
   hex = hex.replace(/^#/, "");
   let rgb = parseInt(hex, 16);
 
