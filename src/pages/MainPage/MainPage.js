@@ -1,6 +1,8 @@
 import { elements } from "@constants";
+import { CurrentQuizContext } from "@context/CurrentQuizContext";
 import Table from "@pages/MainPage/Table";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import QuizGuesser from "./QuizGuesser";
 import SelectedElement from "./SelectedElement";
 import {
   PageWrapper,
@@ -13,6 +15,7 @@ const initializeSelectedElement = () => {
   return elements.find((element) => element.id === +id) || elements[0];
 };
 function MainPage() {
+  const { currentQuiz, setCurrentQuiz } = useContext(CurrentQuizContext);
   const [selectedElement, setSelectedElement] = useState(
     initializeSelectedElement(),
   );
@@ -24,8 +27,17 @@ function MainPage() {
 
   return (
     <PageWrapper>
-      <SelectedElementBlock>
-        {!!selectedElement && (
+      <SelectedElementBlock is_quiz={+!!currentQuiz}>
+        {currentQuiz ? (
+          <QuizGuesser
+            currentQuiz={currentQuiz}
+            setQuizViewQuestion={(index) => {
+              const newQuiz = JSON.parse(JSON.stringify(currentQuiz));
+              newQuiz.viewQuestion = index;
+              setCurrentQuiz(newQuiz);
+            }}
+          />
+        ) : (
           <SelectedElement selectedElement={selectedElement} />
         )}
       </SelectedElementBlock>
@@ -33,6 +45,32 @@ function MainPage() {
         <Table
           selectedElement={selectedElement}
           setSelectedElement={setSelectedElementWithLocalStore}
+          currentQuiz={currentQuiz}
+          setQuizAnswer={(element) => {
+            const newQuiz = JSON.parse(JSON.stringify(currentQuiz));
+            newQuiz.questions[newQuiz.currentQuestion].answers.push(element);
+            const question = newQuiz.questions[newQuiz.currentQuestion];
+            const answers = question.answers;
+            if (
+              answers.length >= newQuiz.settings.attempts ||
+              !!answers.find((answer) => answer.id === question.question.id)
+            ) {
+              newQuiz.currentQuestion++;
+            }
+            if (newQuiz.currentQuestion === newQuiz.questions.length) {
+              newQuiz.rightAnswers = 0;
+              newQuiz.questions.forEach((question) => {
+                if (
+                  question.answers.find(
+                    (answer) => answer.id === question.question.id,
+                  )
+                ) {
+                  newQuiz.rightAnswers++;
+                }
+              });
+            }
+            setCurrentQuiz(newQuiz);
+          }}
         />
       </TableBlock>
     </PageWrapper>

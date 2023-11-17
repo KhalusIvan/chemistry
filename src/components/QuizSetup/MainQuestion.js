@@ -9,7 +9,7 @@ function MainQuestion({ values, errors, touched, handleChange, handleBlur }) {
           Загальні налаштування
         </Typography>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={4}>
         <TextField
           color="primary"
           variant="outlined"
@@ -24,7 +24,7 @@ function MainQuestion({ values, errors, touched, handleChange, handleBlur }) {
           error={Boolean(touched.numberOfQuestions && errors.numberOfQuestions)}
         />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={4}>
         <TextField
           color="primary"
           variant="outlined"
@@ -32,11 +32,26 @@ function MainQuestion({ values, errors, touched, handleChange, handleBlur }) {
           name="questionTime"
           onChange={handleChange}
           onBlur={handleBlur}
-          label="Секунд на запитання"
+          label="Секунд на питання"
           type="number"
           fullWidth
           helperText={touched.questionTime && errors.questionTime}
           error={Boolean(touched.questionTime && errors.questionTime)}
+        />
+      </Grid>
+      <Grid item xs={4}>
+        <TextField
+          color="primary"
+          variant="outlined"
+          value={values.attempts}
+          name="attempts"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          label="Кількість спроб*"
+          type="number"
+          fullWidth
+          helperText={touched.attempts && errors.attempts}
+          error={Boolean(touched.attempts && errors.attempts)}
         />
       </Grid>
     </Grid>

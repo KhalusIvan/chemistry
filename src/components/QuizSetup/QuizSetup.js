@@ -21,7 +21,7 @@ function QuizSetup({ isOpen, handleClose }) {
     <Dialog
       fullWidth
       open={isOpen}
-      maxWidth="xs"
+      maxWidth="sm"
       onClose={handleClose}
       aria-labelledby="responsive-dialog-title"
     >
@@ -30,6 +30,7 @@ function QuizSetup({ isOpen, handleClose }) {
       </DialogTitle>
       <Formik
         initialValues={{
+          attempts: quiz.attempts,
           numberOfQuestions: quiz.numberOfQuestions,
           questionTime: quiz.questionTime || "",
           showId: quiz.showId,
@@ -43,6 +44,12 @@ function QuizSetup({ isOpen, handleClose }) {
         validationSchema={Yup.object().shape({
           numberOfQuestions: Yup.number()
             .positive("Мінімум 1 запитання")
+            .max(118, "Максимум 118 запитань")
+            .integer("Не цілочисельне число")
+            .required("Обовʼязкове поле"),
+          attempts: Yup.number()
+            .positive("Мінімум 1 спроба")
+            .max(118, "Максимум 10 спроб")
             .integer("Не цілочисельне число")
             .required("Обовʼязкове поле"),
           questionTime: Yup.number()
@@ -62,6 +69,7 @@ function QuizSetup({ isOpen, handleClose }) {
         onSubmit={(values) => {
           const obj = {
             numberOfQuestions: +values.numberOfQuestions,
+            attempts: +values.attempts,
             questionTime: +values.questionTime || "",
             showId: values.showId,
             showSymbol: values.showSymbol,

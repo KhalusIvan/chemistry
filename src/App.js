@@ -5,8 +5,10 @@ import MainPage from "@pages/MainPage/MainPage";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
 import { QuizContext } from "@context/QuizContext";
 import { useMemo, useState } from "react";
+import { CurrentQuizContext } from "@context/CurrentQuizContext";
 
 const defaultQuiz = {
+  attempts: 1,
   numberOfQuestions: 10,
   questionTime: "",
   showId: "question",
@@ -36,19 +38,26 @@ const router = createBrowserRouter([
 
 function App() {
   const [quiz, setQuiz] = useState(initializeQuiz());
+  const [currentQuiz, setCurrentQuiz] = useState(null);
 
   const saveQuiz = (quiz) => {
     localStorage.setItem("quizSetting", JSON.stringify(quiz));
     setQuiz(quiz);
   };
 
-  const value = useMemo(() => ({ quiz, setQuiz: saveQuiz }), [quiz]);
+  const quizValue = useMemo(() => ({ quiz, setQuiz: saveQuiz }), [quiz]);
+  const currentQuizValue = useMemo(
+    () => ({ currentQuiz, setCurrentQuiz }),
+    [currentQuiz],
+  );
 
   return (
     <>
       <CssBaseline />
-      <QuizContext.Provider value={value}>
-        <RouterProvider router={router} />
+      <QuizContext.Provider value={quizValue}>
+        <CurrentQuizContext.Provider value={currentQuizValue}>
+          <RouterProvider router={router} />
+        </CurrentQuizContext.Provider>
       </QuizContext.Provider>
     </>
   );

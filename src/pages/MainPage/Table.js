@@ -10,7 +10,12 @@ import OneElement from "@components/TableComponents/OneElement/OneElement";
 import { FullTableWrapper, TableInfoWrapper } from "./styledComponents";
 import TypesPanel from "@components/TableComponents/TypesPanel/TypesPanel";
 
-function Table({ selectedElement, setSelectedElement }) {
+function Table({
+  selectedElement,
+  setSelectedElement,
+  currentQuiz,
+  setQuizAnswer,
+}) {
   const [hoveredTypes, setHoveredTypes] = useState([]);
 
   return (
@@ -27,15 +32,19 @@ function Table({ selectedElement, setSelectedElement }) {
                 hoveredTypes={hoveredTypes}
                 selectedElement={selectedElement}
                 setSelectedElement={setSelectedElement}
+                currentQuiz={currentQuiz}
+                setQuizAnswer={setQuizAnswer}
               />
             );
           })}
-          <LanthanideActinide />
+          <LanthanideActinide settings={currentQuiz?.settings} />
           <InfoWeightText />
-          <TypesPanel
-            hoveredTypes={hoveredTypes}
-            setHoveredTypes={setHoveredTypes}
-          />
+          {(!currentQuiz || currentQuiz?.settings?.showType === "answer") && (
+            <TypesPanel
+              hoveredTypes={hoveredTypes}
+              setHoveredTypes={setHoveredTypes}
+            />
+          )}
         </TableInfoWrapper>
       </Grid>
     </FullTableWrapper>

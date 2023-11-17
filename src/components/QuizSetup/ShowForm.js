@@ -29,12 +29,13 @@ function ShowForm({ values, handleChange, error }) {
         )}
       </Grid>
       <Grid item xs={12}>
-        <Grid container>
+        <Grid container justifyContent="center">
           {questions.map((question) => {
             return (
-              <Grid key={question.name} item xs={12}>
+              <Grid key={question.name} item xs="auto">
                 <Typography variant="h6">{question.title}</Typography>
                 <RadioGroup
+                  style={{ width: 371 }}
                   name={question.name}
                   value={values[question.name]}
                   onChange={handleChange}
