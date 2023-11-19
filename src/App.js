@@ -34,6 +34,14 @@ const router = createBrowserRouter([
       </PageWrapper>
     ),
   },
+  {
+    path: "/chemistry",
+    element: (
+      <PageWrapper>
+        <MainPage />
+      </PageWrapper>
+    ),
+  },
 ]);
 
 function App() {
