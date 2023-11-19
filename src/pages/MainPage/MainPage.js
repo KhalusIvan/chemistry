@@ -14,6 +14,17 @@ const initializeSelectedElement = () => {
   const id = localStorage.getItem("selectedItemId") || 0;
   return elements.find((element) => element.id === +id) || elements[0];
 };
+
+const calculateRightAnswers = (quiz) => {
+  let rightAnswers = 0;
+  quiz.questions.forEach((question) => {
+    if (question.answers.find((answer) => answer.id === question.question.id)) {
+      rightAnswers++;
+    }
+  });
+  return rightAnswers;
+};
+
 function MainPage() {
   const { currentQuiz, setCurrentQuiz } = useContext(CurrentQuizContext);
   const [selectedElement, setSelectedElement] = useState(
@@ -34,6 +45,14 @@ function MainPage() {
             setQuizViewQuestion={(index) => {
               const newQuiz = JSON.parse(JSON.stringify(currentQuiz));
               newQuiz.viewQuestion = index;
+              setCurrentQuiz(newQuiz);
+            }}
+            setQuizNextQuestion={() => {
+              const newQuiz = JSON.parse(JSON.stringify(currentQuiz));
+              newQuiz.currentQuestion += 1;
+              if (newQuiz.currentQuestion === newQuiz.questions.length) {
+                newQuiz.rightAnswers = calculateRightAnswers(newQuiz);
+              }
               setCurrentQuiz(newQuiz);
             }}
           />
@@ -58,16 +77,7 @@ function MainPage() {
               newQuiz.currentQuestion++;
             }
             if (newQuiz.currentQuestion === newQuiz.questions.length) {
-              newQuiz.rightAnswers = 0;
-              newQuiz.questions.forEach((question) => {
-                if (
-                  question.answers.find(
-                    (answer) => answer.id === question.question.id,
-                  )
-                ) {
-                  newQuiz.rightAnswers++;
-                }
-              });
+              newQuiz.rightAnswers = calculateRightAnswers(newQuiz);
             }
             setCurrentQuiz(newQuiz);
           }}
