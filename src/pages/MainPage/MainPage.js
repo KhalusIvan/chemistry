@@ -1,5 +1,6 @@
 import { elements } from "@constants";
 import { CurrentQuizContext } from "@context/CurrentQuizContext";
+import { getHistory } from "@helpers/history";
 import Table from "@pages/MainPage/Table";
 import { useContext, useState } from "react";
 import QuizGuesser from "./QuizGuesser";
@@ -23,6 +24,12 @@ const calculateRightAnswers = (quiz) => {
     }
   });
   return rightAnswers;
+};
+
+const setAsFinished = (quiz) => {
+  const history = getHistory();
+  history.push({ ...quiz, id: new Date() });
+  localStorage.setItem("quizHistory", JSON.stringify(history));
 };
 
 function MainPage() {
@@ -52,6 +59,8 @@ function MainPage() {
               newQuiz.currentQuestion += 1;
               if (newQuiz.currentQuestion === newQuiz.questions.length) {
                 newQuiz.rightAnswers = calculateRightAnswers(newQuiz);
+                newQuiz.viewQuestion = 0;
+                setAsFinished(newQuiz);
               }
               setCurrentQuiz(newQuiz);
             }}
@@ -78,6 +87,8 @@ function MainPage() {
             }
             if (newQuiz.currentQuestion === newQuiz.questions.length) {
               newQuiz.rightAnswers = calculateRightAnswers(newQuiz);
+              newQuiz.viewQuestion = 0;
+              setAsFinished(newQuiz);
             }
             setCurrentQuiz(newQuiz);
           }}
