@@ -29,8 +29,7 @@ const options = {
 
 function TableList({ handleClose }) {
   const [list, setList] = useState(getHistory());
-  const { currentQuiz, setCurrentQuiz } = useContext(CurrentQuizContext);
-  console.log(list);
+  const { setCurrentQuiz } = useContext(CurrentQuizContext);
 
   const deleteQuiz = (id) => {
     const newList = list.filter((item) => item.id !== id);
