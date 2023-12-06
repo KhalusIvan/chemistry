@@ -15,14 +15,12 @@ function QuizGuesserList({ currentQuiz, setQuizViewQuestion }) {
               ? "current"
               : currentQuestion < index
               ? "future"
-              : question.answers.find(
-                  (answer) => answer.id === question.question.id,
-                )
+              : question.answers.includes(question.question)
               ? "success"
               : "error";
 
           return (
-            <Grid key={question.question.id} item xs={2}>
+            <Grid key={question.question} item xs={2}>
               <QuestionBox
                 status={status}
                 is_view={+(viewQuestion === index)}

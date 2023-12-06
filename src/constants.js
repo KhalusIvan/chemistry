@@ -176,7 +176,7 @@ export const elements = [
   },
   {
     id: 14,
-    name: "Сицилій",
+    name: "Силіцій",
     symbol: "Si",
     weight: "28,085",
     electrons: [2, 8, 4],

@@ -76,12 +76,12 @@ function MainPage() {
           currentQuiz={currentQuiz}
           setQuizAnswer={(element) => {
             const newQuiz = JSON.parse(JSON.stringify(currentQuiz));
-            newQuiz.questions[newQuiz.currentQuestion].answers.push(element);
+            newQuiz.questions[newQuiz.currentQuestion].answers.push(element.id);
             const question = newQuiz.questions[newQuiz.currentQuestion];
             const answers = question.answers;
             if (
               answers.length >= newQuiz.settings.attempts ||
-              !!answers.find((answer) => answer.id === question.question.id)
+              !!answers.includes(question.question)
             ) {
               newQuiz.currentQuestion++;
             }

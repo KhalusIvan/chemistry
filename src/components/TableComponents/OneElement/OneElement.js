@@ -43,12 +43,11 @@ function OneElement({
       question = currentQuiz.questions[currentQuiz.viewQuestion];
     }
     if (question) {
-      if (question.answers.find((answer) => answer.id === element.id)) {
-        answeredType =
-          question.question.id === element.id ? "success" : "error";
+      if (question.answers.includes(element.id)) {
+        answeredType = question.question === element.id ? "success" : "error";
       } else if (
         currentQuiz.viewQuestion !== null &&
-        question.question.id === element.id
+        question.question === element.id
       ) {
         answeredType = "success";
       }

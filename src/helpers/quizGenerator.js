@@ -9,7 +9,7 @@ export const generateQuiz = (quiz) => {
     const random = Math.pow(Math.random(), 1.5);
     const elementIndex = Math.floor(random * allElements.length);
     questions.push({
-      question: allElements[elementIndex],
+      question: allElements[elementIndex].id,
       answers: [],
     });
     allElements.splice(elementIndex, 1);

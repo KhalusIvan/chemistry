@@ -4,16 +4,19 @@ import QuizGuesserList from "@components/QuizGuesser/QuizGuesserList/QuizGuesser
 import QuizGuesserPlaceholder from "@components/QuizGuesser/QuizGuesserPlaceholder/QuizGuesserPlaceholder";
 import QuizGuesserResult from "@components/QuizGuesser/QuizGuesserResult/QuizGuesserResult";
 import QuizGuesserTimer from "@components/QuizGuesser/QuizGuesserTimer/QuizGuesserTimer";
+import { elements } from "@constants";
 
 function QuizGuesser({
   currentQuiz,
   setQuizViewQuestion,
   setQuizNextQuestion,
 }) {
-  let question = currentQuiz.questions[currentQuiz.currentQuestion]?.question;
+  let questionElementId =
+    currentQuiz.questions[currentQuiz.currentQuestion]?.question;
 
-  if (!question && currentQuiz.viewQuestion !== null) {
-    question = currentQuiz.questions[currentQuiz.viewQuestion]?.question;
+  if (!questionElementId && currentQuiz.viewQuestion !== null) {
+    questionElementId =
+      currentQuiz.questions[currentQuiz.viewQuestion]?.question;
   }
 
   const isFinished =
@@ -21,9 +24,11 @@ function QuizGuesser({
 
   return (
     <>
-      {question ? (
+      {questionElementId ? (
         <QuizGuesserCard
-          quizGuesserElement={question}
+          quizGuesserElement={elements.find(
+            (element) => element.id === questionElementId,
+          )}
           settings={currentQuiz.settings}
         />
       ) : (
