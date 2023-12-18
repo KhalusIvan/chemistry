@@ -19,7 +19,7 @@ const initializeSelectedElement = () => {
 const calculateRightAnswers = (quiz) => {
   let rightAnswers = 0;
   quiz.questions.forEach((question) => {
-    if (question.answers.find((answer) => answer.id === question.question.id)) {
+    if (question.answers.includes(question.question)) {
       rightAnswers++;
     }
   });
