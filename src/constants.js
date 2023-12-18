@@ -247,7 +247,7 @@ export const elements = [
   {
     id: 21,
     name: "Скандій",
-    symbol: "Se",
+    symbol: "Sc",
     weight: "44,956",
     electrons: [2, 8, 9, 2],
     row: 4,
